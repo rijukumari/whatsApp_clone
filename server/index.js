@@ -15,24 +15,25 @@ const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 2346;
+const FRONTEND_URL = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
 
-// ✅ Middleware
-app.use(cors());
+
+app.use(cors({
+  origin: FRONTEND_URL,
+  credentials: true,
+}));
+
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ✅ Static file serving for image/file access
 app.use("/file", express.static(path.join(__dirname, "uploads")));
 
-// ✅ Main routes
 app.use("/", router);
 
-// ✅ Test route
 app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-// ✅ Start server
 app.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on port ${PORT}`);

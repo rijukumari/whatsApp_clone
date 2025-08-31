@@ -11,6 +11,7 @@ export const AccountProvider = ({children}) => {
     const [newMessageFlag,setNewMessageFlag] = useState(false)
     const socket = useRef();
     useEffect(()=>{
+        // socket.current = io('ws://localhost:2132')
         socket.current = io('ws://localhost:2132')
     },[])
 

@@ -1,9 +1,12 @@
 import { Server } from "socket.io";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
+const FRONTEND_URL = process.env.VITE_FRONTEND_URL || "http://localhost:3000";
 const io = new Server(2132, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: FRONTEND_URL,
   },
 });
 
